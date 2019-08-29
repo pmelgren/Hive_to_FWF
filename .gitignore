@@ -102,3 +102,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+test_fwf_2019.txt

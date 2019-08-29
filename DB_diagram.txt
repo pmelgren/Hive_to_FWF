@@ -1,0 +1,21 @@
+CREATE EXTERNAL TABLE sample_data
+(
+AccountNo int,
+Amount decimal(10,0),
+Bonus decimal(10,0),
+Item varchar(20),
+date varchar(50)
+auxiliary2 varchar(50),
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES
+(
+'serialization.encoding' = 'windows-1253',
+'line.delim' = '\n',
+'field.delim' = ';'
+)
+LOCATION 'hdfs://fakelocation/data/'
+TBLPROPERTIES
+(
+'bigsql.table.io.doAs' = 'false'
+);
