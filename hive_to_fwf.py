@@ -11,7 +11,7 @@ import datetime
 # Manipulate a few columns of the 
 def restructure(df):
     df['DATE'] = df['Date'].apply(lambda x: x[0:10].replace('-', ''))  
-    df['ACCOUNTNO'] = df['AccountNo'].apply(lambda x: '{:0>10f}'.format(float(x)))
+    df['ACCOUNTNO'] = df['AccountNo'].apply(lambda x: '{:0>10.0f}'.format(float(x)))
 
 
     # Specify the order of the columns using this list
@@ -45,7 +45,7 @@ def get_query_text():
 # ETL Functions
 ########################
 
-def hive_to_dataframe(user, pwd='', host='localhost', db='cbs_jbcfg'):
+def hive_to_dataframe(user, pwd='', host='localhost', db='sample_data'):
     """Hive to DataFrame.
 
     Function takes Hive connection information and returns the entire
@@ -117,8 +117,8 @@ pd.DataFrame.to_fwf = to_fwf
 ########################
     
 # read in data
-#df = hive_to_dataframe('etl_hadoop_daas','','10.12.20.121') #final version
-df = pd.read_csv("./sample_data.csv", sep=',')  # read test data
+df = hive_to_dataframe('fake_user','','0.00.0.000') #final version
+#df = pd.read_csv("./sample_data.csv", sep=',')  # read test data
 
 # write dataframe to fixed width file
 df.restructure().to_fwf("./test_fwf_2019.txt", '20190829')
